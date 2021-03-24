@@ -54,7 +54,7 @@ public class CalendarUtils {
         }
     }
 
-    public boolean addTaskHints(int year, int month, int day){
+    public boolean addTaskHints(int year, int month, List<Integer> day){
         String key=hashKey(year, month);
         List<Integer> hints=sUtils.sMonthTaskHint.get(key);
         if(hints==null){
@@ -261,6 +261,8 @@ public class CalendarUtils {
     }
 
      */
+    //한 주의 열을 구하는 함수
+    //첫 주나 마지막 주는 7일이 아닌 주이기 때문에 return 조건문에서 분할
     public static int getMonthRows(int year, int month){
         int size=getFirstDayWeek(year,month)+getMonthDays(year,month)-1;
         return size%7==0? size/7:(size/7)+1;
