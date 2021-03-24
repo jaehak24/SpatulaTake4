@@ -19,7 +19,7 @@ import org.joda.time.DateTime;
 
 import java.util.Date;
 
-public class WeekView {
+public class WeekView extends View{
     private static final int NUM_COLUMNS = 7;
     private Paint mPaint;
     private Paint mLunarPaint;
@@ -48,35 +48,43 @@ public class WeekView {
     private GestureDetector mGestureDetector;
 
 
-    public WeekView(Context context, DateTime dateTime){this(context, null, dateTime);}
+    public WeekView(Context context, DateTime dateTime) {
+        this(context, null, dateTime);
+    }
 
-    public WeekView(Context context, TypedArray array, DateTime dateTime){
+    public WeekView(Context context, TypedArray array, DateTime dateTime) {
         this(context, array, null, dateTime);
     }
 
-    public WeekView(Context context, TypedArray array, AttributeSet attrs, int defStyleAttr, DateTime dateTime){
+    public WeekView(Context context, TypedArray array, AttributeSet attrs, DateTime dateTime) {
+        this(context, array, attrs, 0, dateTime);
+    }
+
+    public WeekView(Context context, TypedArray array, AttributeSet attrs, int defStyleAttr, DateTime dateTime) {
         super(context, attrs, defStyleAttr);
-        initAttrs(array,dateTime);
+        initAttrs(array, dateTime);
         initPaint();
         initWeek();
-        initGestureDetctor();
+        initGestureDetector();
     }
 
     private void initTaskHint(DateTime date) {
         if (mIsShowHint) {
-            // 데이터베이스에서 도트 힌트 가져오기
+            // 데이터에서 도트 힌트 데이터 가져오기
             ScheduleDao dao = ScheduleDao.getInstance(getContext());
             if (CalendarUtils.getInstance(getContext()).getTaskHints(date.getYear(), date.getMonthOfYear() - 1).size() == 0)
                 CalendarUtils.getInstance(getContext()).addTaskHints(date.getYear(), date.getMonthOfYear() - 1, dao.getTaskHintByMonth(mSelYear, mSelMonth));
         }
     }
+
     private void initAttrs(TypedArray array, DateTime dateTime){
         if(array !=null){
-            mSelectDayColor=array.getColor(R.styleable.WeekCalendarView_week_selected_text_color, Color.parseColor("#FFFFFF"));
-            mSelectBGColor=array.getColor(R.styleable.WeekCalendarView_week_selected_circle_color,Color.parseColor("#E8E8E8"));
-            mSelectBGTodayColor=array.getColor(R.styleable.WeekCalendarView_week_normal_text_color,Color.parseColor("#FF8594"));
-            mCurrentDayColor=array.getColor(R.styleable.WeekCalendarView_week_today_text_color,Color.parseColor("#FF8594"));
-            mHintCircleColor=array.getColor(R.styleable.WeekCalendarView_week_hint_circle_color,Color.parseColor("#FE8595"));
+            mSelectDayColor = array.getColor(R.styleable.WeekCalendarView_week_selected_text_color, Color.parseColor("#FFFFFF"));
+            mSelectBGColor = array.getColor(R.styleable.WeekCalendarView_week_selected_circle_color, Color.parseColor("#E8E8E8"));
+            mSelectBGTodayColor = array.getColor(R.styleable.WeekCalendarView_week_selected_circle_today_color, Color.parseColor("#FF8594"));
+            mNormalDayColor = array.getColor(R.styleable.WeekCalendarView_week_normal_text_color, Color.parseColor("#575471"));
+            mCurrentDayColor = array.getColor(R.styleable.WeekCalendarView_week_today_text_color, Color.parseColor("#FF8594"));
+            mHintCircleColor = array.getColor(R.styleable.WeekCalendarView_week_hint_circle_color, Color.parseColor("#FE8595"));
             mLunarTextColor = array.getColor(R.styleable.WeekCalendarView_week_lunar_text_color, Color.parseColor("#ACA9BC"));
             mHolidayTextColor = array.getColor(R.styleable.WeekCalendarView_week_holiday_color, Color.parseColor("#A68BFF"));
             mDaySize = array.getInteger(R.styleable.WeekCalendarView_week_day_text_size, 13);
@@ -101,11 +109,13 @@ public class WeekView {
             mIsShowHolidayHint = true;
         }
         mStartDate = dateTime;
-        int holidays[]= CalendarUtils.getInstance(getContext()).getHolidays(mStartDate.getYear(),mStartDate.getMonthOfYear());
-
+        /*mRestBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_rest_day);
+        mWorkBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_work_day);
+        int holidays[] = CalendarUtils.getInstance(getContext()).getHolidays(mStartDate.getYear(), mStartDate.getMonthOfYear());
+         */
+        int row=CalendarUtils.getWeekRow(mStartDate.getYear(),mStartDate)
     }
 
-    private Context getContext() {
-    }
+
 
 }

@@ -61,6 +61,7 @@ public class MonthView extends View {
         initMonth();
         initGestureDetector();
         initTaskHint();
+
     }
 
     private void initTaskHint() {
