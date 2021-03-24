@@ -39,7 +39,7 @@ public class weekAdapter extends PagerAdapter {
     @Override
     public int getCount() {return mWeekCount;}
 
-    //밑에 올라오는 리스트의 열을 올려주는 아이템
+    //밑에 올라오는 리스트의 열을 올려주는 아이템을 올려주는 메소드
     @Override
     public Object instantiateItem(ViewGroup container, int position){
         for(int i=0; i<3; i++){
@@ -50,7 +50,28 @@ public class weekAdapter extends PagerAdapter {
         container.addView(mViews.get(position));
         return mViews.get(position);
     }
-    //
+    //뷰의 아이템과 오브젝트의 일치성 판별
     @Override
     public boolean isViewFromObject(View view, Object object){return view==object;}
+
+
+    //올려놓은 스케줄 destroy
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object){
+        container.removeView((View) object);
+    }
+    public SparseArray<WeekView> getViews() {
+        return mViews;
+    }
+    public int getWeekCount(){return mWeekCount;}
+
+    public WeekView instanceWeekView(int position){
+        WeekView weekView=new WeekView(mContext,mArray,mStartDate.plusWeeks(position-mWeekCount/2));
+        weekView.setId(position);
+        weekView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        weekView.setOnWeekClickListener(mWeekCalendarView);
+        weekView.invalidate();
+        mViews.put(position,weekView);
+        return weekView;
+    }
 }
