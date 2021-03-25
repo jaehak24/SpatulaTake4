@@ -67,8 +67,7 @@ public class CalendarUtils {
         }
         return hints;
     }
-
-    public List<Integer>  removeTaskHint(int year, int month, List<Integer> days){
+    public List<Integer> removeTaskHints(int year, int month, List<Integer> days) {
         String key = hashKey(year, month);
         List<Integer> hints = sUtils.sMonthTaskHint.get(key);
         if (hints == null) {
@@ -79,15 +78,46 @@ public class CalendarUtils {
         }
         return hints;
     }
+    public boolean addTaskHint(int year, int month, int day) {
+        String key = hashKey(year, month);
+        List<Integer> hints = sUtils.sMonthTaskHint.get(key);
+        if (hints == null) {
+            hints = new ArrayList<>();
+            hints.add(day);
+            sUtils.sMonthTaskHint.put(key, hints);
+            return true;
+        } else {
+            if (!hints.contains(day)) {
+                hints.add(day);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 
-    public List<Integer> getTaskHints(int year, int month) {
+    public boolean removeTaskHint(int year, int month, int day) {
         String key = hashKey(year, month);
         List<Integer> hints = sUtils.sMonthTaskHint.get(key);
         if (hints == null) {
             hints = new ArrayList<>();
             sUtils.sMonthTaskHint.put(key, hints);
+        } else {
+            if (hints.contains(day)) {
+                Iterator<Integer> i = hints.iterator();
+                while (i.hasNext()) {
+                    Integer next = i.next();
+                    if (next == day) {
+                        i.remove();
+                        break;
+                    }
+                }
+                return true;
+            } else {
+                return false;
+            }
         }
-        return hints;
+        return false;
     }
 
     private static String hashKey(int year, int month){
@@ -176,6 +206,15 @@ public class CalendarUtils {
         if(lastweek==7)
             day--;
         return (day+week-1)/7;
+    }
+    public List<Integer> getTaskHints(int year, int month) {
+        String key = hashKey(year, month);
+        List<Integer> hints = sUtils.sMonthTaskHint.get(key);
+        if (hints == null) {
+            hints = new ArrayList<>();
+            sUtils.sMonthTaskHint.put(key, hints);
+        }
+        return hints;
     }
 
     /*쉬는 날 세팅 중국

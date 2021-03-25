@@ -255,7 +255,6 @@ public class WeekView extends View {
     }
 
 
-
     private void drawHintCircle(Canvas canvas) {
         if (mIsShowHint) {
             mPaint.setColor(mHintCircleColor);
@@ -284,16 +283,21 @@ public class WeekView extends View {
     }
 
     private void drawHintCircle(List<Integer> hints, int day, int col, Canvas canvas) {
-        if(!hints.contains(day)) return;
-        float circleX=(float)(mColumnSize*col+mColumnSize*0.5);
-        float circleY=(float)(mRowSize*0.75);
-        canvas.drawCircle(circleX,circleY,mCircleRadius,mPaint);
+        if (!hints.contains(day)) return;
+        float circleX = (float) (mColumnSize * col + mColumnSize * 0.5);
+        float circleY = (float) (mRowSize * 0.75);
+        canvas.drawCircle(circleX, circleY, mCircleRadius, mPaint);
     }
-    @Override
-    public boolean performClick() {return super.performClick();}
 
     @Override
-    public boolean onTouchEvent(MotionEvent event){return mGestureDetector.onTouchEvent(event);}
+    public boolean performClick() {
+        return super.performClick();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return mGestureDetector.onTouchEvent(event);
+    }
 
 
     //선택한 날짜의 연도와 달을 안다.
@@ -320,29 +324,44 @@ public class WeekView extends View {
         setSelectYearMonth(year, month, day);
         invalidate();
     }
-    public void setOnWeekClickListener(OnWeekClickListener onWeekClickListener){
-        mOnWeekClickListener=onWeekClickListener;
-    }
-    public DateTime getStartDate() {return mStartDate;}
 
-    public DateTime getEndDate() {return mStartDate.plusDays(6);}
+    public void setOnWeekClickListener(OnWeekClickListener onWeekClickListener) {
+        mOnWeekClickListener = onWeekClickListener;
+    }
+
+    public DateTime getStartDate() {
+        return mStartDate;
+    }
+
+    public DateTime getEndDate() {
+        return mStartDate.plusDays(6);
+    }
 
 
     /* 현재 선택한 연도 return*/
-    public int getSelectYear(){return mSelYear;}
+    public int getSelectYear() {
+        return mSelYear;
+    }
+
     /* 현재 선택한 월 return*/
-    public int getSelectMonth(){return mSelMonth;}
+    public int getSelectMonth() {
+        return mSelMonth;
+    }
+
     /*현재 선택한 날짜 return*/
-    public int getSelectDay(){return mSelDay;}
+    public int getSelectDay() {
+        return mSelDay;
+    }
 
     /*@param hints*/
-    public void addTaskHints(List<Integer> hints){
-        if(mIsShowHint){
-            CalendarUtils.getInstance(getContext()).addTaskHints(mSelYear,mSelMonth,hints);
+    public void addTaskHints(List<Integer> hints) {
+        if (mIsShowHint) {
+            CalendarUtils.getInstance(getContext()).addTaskHints(mSelYear, mSelMonth, hints);
             //UI 쓰레드에서 뷰를 다시 그리는 함수
             invalidate();
         }
     }
+
     //도트 힌트 삭제하기
     public void removeTaskHint(Integer day) {
         if (mIsShowHint) {
@@ -351,10 +370,6 @@ public class WeekView extends View {
             }
         }
     }
-
-
-
-
 
 
 }

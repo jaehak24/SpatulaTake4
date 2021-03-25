@@ -69,6 +69,9 @@ public class WeekCalendarView extends ViewPager implements OnWeekClickListener{
 
         }
     };
+    public void setOnCalendarClickListener(OnCalendarClickListener onCalendarClickListener) {
+        mOnCalendarClickListener = onCalendarClickListener;
+    }
 
     /*
     * onCalendarClickListener*/
