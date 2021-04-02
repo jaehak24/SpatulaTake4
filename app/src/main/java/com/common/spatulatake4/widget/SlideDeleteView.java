@@ -90,7 +90,9 @@ public class SlideDeleteView extends FrameLayout {
         }
     }
 
-    private void close(boolean b) {
+
+    // 그룹을 삭제
+    public void close(boolean b) {
         if (isOpen()) {
             mIsOpen = false;
             if (b) {
@@ -180,4 +182,10 @@ public class SlideDeleteView extends FrameLayout {
             }
         }
     }
+
+    public void setOnContentClickListener(OnContentClickListener onContentClickListener){
+        mOnContentClickListener=onContentClickListener;
+    }
+
+
 }

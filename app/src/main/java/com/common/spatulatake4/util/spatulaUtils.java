@@ -11,7 +11,7 @@ public class spatulaUtils {
         return new SimpleDateFormat("HH:mm", Locale.KOREA).format(new Date(time));
     }
     //이벤트 설정의 태그 색을 설정
-    static int getEventSetColor(int color){
+    public static int getEventSetColor(int color){
         switch (color){
             case 0:
                 return R.color.holiday_text_color;

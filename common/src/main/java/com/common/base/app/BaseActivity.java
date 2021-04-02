@@ -46,6 +46,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     //정적 데이터 연동--메모리에 데이터를 올려놓은 상태에서 필요할 때마다, 데이터를 호출하여 사용하는 데이터
     protected void bindData(){}
 
+
+
     protected <VT extends View> VT searchViewByID(int id){
         VT view=(VT)findViewById(id);
         if(view==null)
@@ -53,5 +55,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         return view; //findviewbyId를 했을 때 nullpointer error 검사 함수
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        bindData();
+    }
 
 }
