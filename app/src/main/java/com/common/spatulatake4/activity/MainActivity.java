@@ -8,6 +8,7 @@ import com.common.bean.EventSet;
 import com.common.spatulatake4.R;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String ADD_EVENT_SET_ACTION = "";
     //Test
 
     @Override

@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class spatulaUtils {
+public class SpatulaUtils {
     public static String timeStamp2Time(long time){
         return new SimpleDateFormat("HH:mm", Locale.KOREA).format(new Date(time));
     }

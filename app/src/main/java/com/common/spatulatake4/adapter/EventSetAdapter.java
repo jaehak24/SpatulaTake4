@@ -15,8 +15,8 @@ import com.common.listener.OnTaskFinishedListener;
 import com.common.spatulatake4.Dialog.ConfirmDialog;
 import com.common.spatulatake4.R;
 import com.common.spatulatake4.activity.MainActivity;
-import com.common.spatulatake4.task.schedule.RemoveEventSetTask;
-import com.common.spatulatake4.util.spatulaUtils;
+import com.common.spatulatake4.task.schedule.RemoveScheduleTask;
+import com.common.spatulatake4.util.SpatulaUtils;
 import com.common.spatulatake4.widget.SlideDeleteView;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public class EventSetAdapter extends RecyclerView.Adapter<EventSetAdapter.EventS
         final EventSet eventSet = mEventSets.get(position);
         holder.sdvEventSet.close(false);
         holder.tvEventSetName.setText(eventSet.getName());
-        holder.vEventSetColor.setBackgroundResource(spatulaUtils.getEventSetColor(eventSet.getColor()));
+        holder.vEventSetColor.setBackgroundResource(SpatulaUtils.getEventSetColor(eventSet.getColor()));
         holder.ibEventSetDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +70,7 @@ public class EventSetAdapter extends RecyclerView.Adapter<EventSetAdapter.EventS
 
             @Override
             public void onConfirm() {
-                new RemoveEventSetTask(mContext, new OnTaskFinishedListener<Boolean>() {
+                new RemoveScheduleTask(mContext, new OnTaskFinishedListener<Boolean>() {
                     @Override
                     public void onTaskFinished(Boolean data) {
                         if (data) {
