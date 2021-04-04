@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 
 public abstract class BaseFragment extends Fragment {
 
-    private Activity mActivity;
+    public Activity mActivity;
     private View mView;
 
     @Nullable

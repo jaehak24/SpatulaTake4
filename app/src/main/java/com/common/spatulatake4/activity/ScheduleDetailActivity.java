@@ -1,11 +1,9 @@
 package com.common.spatulatake4.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,7 +17,6 @@ import com.common.spatulatake4.Dialog.InputLocationDialog;
 import com.common.spatulatake4.Dialog.SelectEventSetDialog;
 import com.common.spatulatake4.R;
 import com.common.spatulatake4.task.eventset.LoadEventSetMapTask;
-import com.common.spatulatake4.task.eventset.SelectDataDialog;
 import com.common.spatulatake4.task.schedule.UpdateScheduleTask;
 import com.common.spatulatake4.util.DataUtils;
 import com.common.spatulatake4.util.SpatulaUtils;

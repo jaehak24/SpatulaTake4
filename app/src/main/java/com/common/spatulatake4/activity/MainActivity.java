@@ -19,4 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void gotoEventSetFragment(EventSet eventSet) {
     }
+
+    public void resetMainTitleDate(int year, int month, int day) {
+    }
 }
